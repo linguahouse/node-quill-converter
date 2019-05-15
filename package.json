@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "jsdom": "^11.8.0",
-    "quill": "*"
+    "quill": ">=1.3.6"
   },
   "devDependencies": {
     "jest": "^23.5.0"
