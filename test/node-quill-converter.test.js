@@ -6,7 +6,7 @@ const {
 describe('node-quill-converter', () => {
   it('convertTextToDelta', () => {
     let text = 'hello, world';
-    let deltaExpected = {ops: [{insert: 'hello, world\n'}]};
+    let deltaExpected = {ops: [{insert: 'hello, world'}]};
 
     let deltaResult = convertTextToDelta(text);
 
@@ -56,10 +56,40 @@ describe('node-quill-converter', () => {
   });
 
   it('GitHub Issue #2', () => {
-    let issueDeltaJSON = "{\"ops\":[{\"insert\":\"first\"},{\"attributes\":{\"list\":\"ordered\"},\"insert\":\"\\n\"},{\"insert\":\"second\"},{\"attributes\":{\"list\":\"ordered\"},\"insert\":\"\\n\"},{\"insert\":\"next level\"},{\"attributes\":{\"indent\":1,\"list\":\"ordered\"},\"insert\":\"\\n\"}]}"
-    let delta = JSON.parse(issueDeltaJSON);
+    let delta = {
+     "ops": [
+      {
+       "insert": "first"
+      },
+      {
+       "attributes": {
+        "list": "ordered"
+       },
+       "insert": "\n"
+      },
+      {
+       "insert": "second"
+      },
+      {
+       "attributes": {
+        "list": "ordered"
+       },
+       "insert": "\n"
+      },
+      {
+       "insert": "next level"
+      },
+      {
+       "attributes": {
+        "indent": 1,
+        "list": "ordered"
+       },
+       "insert": "\n"
+      }
+     ]
+    };
 
-    let htmlExpected = "<ol><li>first</li><li>second</li><li class=\"ql-indent-1\">next level</li></ol>";
+    let htmlExpected = "<ol><li data-list=\"ordered\"><span class=\"ql-ui\" contenteditable=\"false\"></span>first</li><li data-list=\"ordered\"><span class=\"ql-ui\" contenteditable=\"false\"></span>second</li><li data-list=\"ordered\" class=\"ql-indent-1\"><span class=\"ql-ui\" contenteditable=\"false\"></span>next level</li></ol>";
     let htmlResult = convertDeltaToHtml(delta);
 
     expect(htmlResult).toEqual(htmlExpected);
