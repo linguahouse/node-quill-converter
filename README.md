@@ -3,6 +3,10 @@
 
 The purpose of this package is to assist in migrating to or from the [Quill editor](https://quilljs.com/).
 
+## Requirements
+
+Node 8 or later
+
 ## Installation
 ```
 # Via NPM
