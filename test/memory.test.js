@@ -11,6 +11,9 @@ describe('node-quill-converter', () => {
       const text = 'hello, world';
 
       convertTextToDelta(text);
+    }, {
+      iterations: 10,
+      gcollections: 20
     })
   })
 
@@ -19,6 +22,9 @@ describe('node-quill-converter', () => {
       const html = `<p>hello, <strong>world</strong></p>`;
 
       convertHtmlToDelta(html);
+    }, {
+      iterations: 10,
+      gcollections: 20
     })
   })
 
@@ -39,6 +45,9 @@ describe('node-quill-converter', () => {
       };
 
       convertDeltaToHtml(delta);
+    }, {
+      iterations: 10,
+      gcollections: 20
     })
   })
 })
